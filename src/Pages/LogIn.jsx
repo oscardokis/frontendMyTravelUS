@@ -1,7 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom'
 import Layout from '../Components/Layout.jsx'
-import { useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
+import { GeneralContext } from '../Components/Context.jsx'
+
 export default function LogIn() {
+  const { setIsValidUser } = useContext(GeneralContext)
   const navigate = useNavigate()
   const [isUserLogin, setIsUserLogin] = useState(
     {userName: false,
@@ -22,7 +25,7 @@ export default function LogIn() {
       const res = await response.json()
       if(res === "username") return setIsUserLogin({userName: true, password: false})
       if(res === "password") return setIsUserLogin({userName: false, password: true})
-      console.log(res)
+      setIsValidUser(true)
       navigate("/");
     } catch (error) {
       console.error(error)
