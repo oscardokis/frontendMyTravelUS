@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import '../styles/ImageSlider.css'
 import DotFill from '../assets/DotFill.svg'
 import DotEmpty from '../assets/DotEmpty.svg'
@@ -6,6 +6,18 @@ import LeftArrow from '../assets/leftArrow.svg'
 import RightArrow from '../assets/rightArrow.svg'
 const ImageSlider = ({ images }) => {
   const [imageIndex, setImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setImageIndex( index => {
+        if(index === images.length - 1){
+          return 0
+        }
+        return index + 1
+      })
+    }, 8000)
+    return () => clearInterval(interval)
+  }, [imageIndex, images.length])
 
   function showNextImage(){
     setImageIndex( index => {
@@ -15,6 +27,7 @@ const ImageSlider = ({ images }) => {
       return index + 1
     })
   }
+
   function showPreviousImage(){
     setImageIndex( index => {
       if(index === 0){
@@ -38,6 +51,14 @@ const ImageSlider = ({ images }) => {
               translate: `${-100 * imageIndex}%`,
               transition: 'translate 300ms ease-in-out'}} />
         ))}
+      </div>
+      <div>
+        <p className="text-white text-4xl font-semibold p-3 absolute top-16 left-16 bg-black/50 rounded-3xl">
+          {images[imageIndex].city}</p>
+      </div>
+      <div>
+        <p className="text-white text-2xl font-semibold p-3 absolute bottom-16 right-2/4 translate-x-1/2 bg-black/50 rounded-3xl">
+          {images[imageIndex].description}</p>
       </div>
       <button 
         onClick={showNextImage} 

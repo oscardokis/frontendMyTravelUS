@@ -7,6 +7,7 @@ import Navbar from './Components/Navbar.jsx'
 import SignUp from './Pages/SignUp.jsx'
 import LogIn from './Pages/LogIn.jsx'
 import MyTrips from './Pages/MyTrips.jsx'
+import { GeneralProvider } from './Components/Context.jsx'
 
 const AppRouter = () => {
   let routes = useRoutes([
@@ -24,10 +25,12 @@ const AppRouter = () => {
 function App() {
 
   return (
-    <BrowserRouter>
-      <AppRouter />
-      <Navbar />
-    </BrowserRouter>
+    <GeneralProvider>
+      <BrowserRouter>
+        <Navbar />
+        <AppRouter />
+      </BrowserRouter>
+    </GeneralProvider>
   )
 }
 
