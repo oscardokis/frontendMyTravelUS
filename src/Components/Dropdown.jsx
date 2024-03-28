@@ -1,9 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import '../styles/Dropdown.css'; // Assuming you have a CSS file for styles
+import { GeneralContext } from './Context';
 
 const Dropdown = ({ options, placeholder }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const {selectedOption, setSelectedOption} = useContext(GeneralContext);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
