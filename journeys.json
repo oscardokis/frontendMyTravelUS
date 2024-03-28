@@ -1,0 +1,39 @@
+{
+  "travelExperiences": [
+    {
+      "name": "Sunset Keys Escape",
+      "typeOfJourney": "Beach",
+      "location": "Key West, Florida, USA",
+      "description": "Discover the serene beauty of Key West's sandy beaches and enjoy the warm, turquoise waters of the Florida Keys.",
+      "createdBy": "Dani24"
+    },
+    {
+      "name": "Rocky Mountain Ski Thrills",
+      "typeOfJourney": "Skiing",
+      "location": "Vail, Colorado, USA",
+      "description": "Experience the thrill of skiing down the vast, powdery slopes of Vail, nestled in the heart of the Rocky Mountains.",
+      "createdBy": "Luce29"
+    },
+    {
+      "name": "Forest Whispers",
+      "typeOfJourney": "Camping",
+      "location": "Shenandoah National Park, Virginia, USA",
+      "description": "Immerse yourself in the tranquil beauty of Shenandoah National Park and enjoy memorable nights around a campfire under a canopy of stars.",
+      "createdBy": "Oscar25"
+    },
+    {
+      "name": "Golden Coast Leisure",
+      "typeOfJourney": "Beach",
+      "location": "Big Sur, California, USA",
+      "description": "Relax on the rugged, breathtaking beaches of Big Sur, where the Pacific Ocean meets the cliffs of the Californian coast.",
+      "createdBy": "Vero28"
+    },
+    {
+      "name": "Historic Trail Trek",
+      "typeOfJourney": "Other",
+      "location": "Williamsburg, Virginia, USA",
+      "description": "Step back in time as you explore the historic sites of Williamsburg, offering a unique glimpse into America's past.",
+      "createdBy": "Kathy29"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.img-slider-btn:hover > * {
+  animation: squish 400ms ease-in-out;
+}
+
+@keyframes squish {
+  50% {
+    scale: 1.4 0.6;
+  }
+}
+.img-slider-dot-btn,
+.img-slider-dot-btn:focus-visible {
+  transition: scale 100ms ease-in-out;
+}
+.img-slider-dot-btn:hover,
+.img-slider-dot-btn:focus-visible{
+  scale:1.2
+}
