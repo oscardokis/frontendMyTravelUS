@@ -3,7 +3,7 @@ import { useContext, useRef, useState } from 'react'
 import { GeneralContext } from './Context.jsx'
 
 export default function LogInForm({ navigateTo }) {
-  const { setIsValidUser } = useContext(GeneralContext)
+  const { setIsValidUser, setToken } = useContext(GeneralContext)
   const navigate = useNavigate()
   const [isUserLogin, setIsUserLogin] = useState(
     {userName: false,
@@ -24,6 +24,7 @@ export default function LogInForm({ navigateTo }) {
       const res = await response.json()
       if(res === "username") return setIsUserLogin({userName: true, password: false})
       if(res === "password") return setIsUserLogin({userName: false, password: true})
+      setToken(res.token)
       setIsValidUser(true)
       navigate(`${navigateTo}`);
     } catch (error) {

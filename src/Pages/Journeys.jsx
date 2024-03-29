@@ -21,20 +21,38 @@ const activities = [
 ]
 
 export default function Journeys() {
-  const { isValidUser, selectedOption} = useContext(GeneralContext)
-
+  const { isValidUser, setIsValidUser, selectedOption, token} = useContext(GeneralContext)
   const form = useRef()
+
+  const commentFetch = async (data) => {
+    try {
+      const response = await fetch('http://localhost:3001/api/v1/comments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(data),
+      })
+      if (!response.ok){
+        if(response.status === 401) setIsValidUser(false)
+        throw new Error('Comment failed') 
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  } 
+
   const handleJourney = (e) => {
     e.preventDefault()
     const formData = new FormData(form.current)
     const journey = {
-      name: formData.get('titleJourney').trim(),
-      typeOfJourney: selectedOption,
-      location: formData.get('locationJourney').trim(),
-      description: formData.get('descriptionJourney').trim(),
-      createdBy: 'User'
+      titleJourney: formData.get('titleJourney').trim(),
+      typeJourney: selectedOption,
+      locationJourney: formData.get('locationJourney').trim(),
+      descriptionJourney: formData.get('descriptionJourney').trim()
     }
-    console.log(journey)
+    commentFetch(journey)
   }
   return (
     <Layout>
