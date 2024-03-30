@@ -5,7 +5,6 @@ export const GeneralContext = createContext()
 
 export const GeneralProvider = ({children}) => {
   const [isValidUser, setIsValidUser] = useState(false)
-  const [selectedOption, setSelectedOption] = useState(null);
   const [token, setToken] = useState(null);
 
 
@@ -13,8 +12,6 @@ export const GeneralProvider = ({children}) => {
     <GeneralContext.Provider value={{
       isValidUser,
       setIsValidUser,
-      selectedOption,
-      setSelectedOption,
       token,
       setToken
     }}>

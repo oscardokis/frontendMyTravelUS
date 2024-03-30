@@ -1,6 +1,7 @@
 import Dropdown from '../Components/Dropdown.jsx'
 import Layout from '../Components/Layout.jsx'
 export default function Adventure() {
+  
   const states = [
     "Alabama",
     "Alaska",
@@ -86,7 +87,7 @@ export default function Adventure() {
     <Layout>
       <div className='flex justify-around w-full'>
       <div className='border border-bluelight border-dashed rounded-lg w-3/12 p-12 mt-12'>
-        <div className='flex flex-col gap-6'>
+        <form className='flex flex-col gap-6'>
           <p className='text-center text-2xl'>Got a destination in mind?</p>
           <input
             type='text'
@@ -103,7 +104,7 @@ export default function Adventure() {
             <Dropdown options={activities} placeholder='--Choose a activity--' />
           </div>
           <button className='rounded-md p-3 bg-bluelight'>Find Your Adventure</button>          
-        </div>
+        </form>
       </div>
       <div className='border border-bluelight border-dashed rounded-lg p-12 mt-12 flex justify-center items-center'>
         <p className='text-5xl '>Your discoveries are on the horizon...</p>
