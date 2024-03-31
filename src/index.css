@@ -7,4 +7,5 @@ html{
   background-color: #0f172a;
   scrollbar-color: #0e9fe1 #0f172a;
   scrollbar-width: thin;
+  box-sizing: border-box; 
 }

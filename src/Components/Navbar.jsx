@@ -34,16 +34,21 @@ export default function Navbar () {
             Journeys
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/adventure">
-            Plan Adventure
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/my-trips">
-          My Trips
-          </NavLink>
-        </li>
+        {isValidUser && (
+          <li>
+            <NavLink to="/adventure">
+              New Adventure
+            </NavLink>
+          </li>
+        
+        )}
+        {isValidUser && (
+          <li>
+            <NavLink to="/my-trips">
+              My Trips
+            </NavLink>
+          </li>
+        )}
         <li>
           {isValidUser ? (
             <NavLink 

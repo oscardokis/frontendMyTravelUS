@@ -1,7 +1,7 @@
-import { Link, useNavigate } from 'react-router-dom'
-import Layout from '../Components/Layout.jsx'
+import { useNavigate } from 'react-router-dom'
 import { useRef, useState } from 'react'
-export default function SignUp() {
+
+export default function SignUp({ setIsLogin }) {
   const navigate = useNavigate()
   const [isUser, setIsUser] = useState(
     {userName: false,
@@ -51,51 +51,48 @@ export default function SignUp() {
     userFetch(SignUpInfo)
   }
   return (
-    <Layout>
-      <div className='border border-bluelight border-dashed rounded-lg w-96 p-6 mt-12'>
-        <h1 className='text-3xl font-bold text-center'>Sign Up</h1>
-        <form 
-          className='flex flex-col gap-3 space-y-4 mt-4'
-          ref={form}
-          action='submit'
-        >
-          <input
-            type='text'
-            placeholder='Username'
-            name='username'
-            onChange={() => setIsUser({...isUser, userName: false})}
-            autoComplete='new-username'
-            className={`border ${isUser.userName ?'border-red':'border-bluelight'} rounded-md p-3 bg-transparent `}
-          />
-          <input
-            type='email'
-            placeholder='Email'
-            name='email'
-            onChange={() => setIsUser({...isUser, email: false})}
-            autoComplete='new-email'
-            className={`border ${isUser.email ?'border-red':'border-bluelight'} rounded-md p-3 bg-transparent autofill:bg-transparent`}
-          />
-          <input
-            type='password'
-            placeholder='Password'
-            name='password'
-            autoComplete='new-password'
-            className='border border-bluelight rounded-md p-3 bg-transparent autofill:bg-transparent'
-          />
-          <button 
-            className='bg-bluelight text-white rounded-md p-3' 
-            onClick={(e) => handleSingUp(e)}
-            type='submit'
-          >
-            Sign Up
-          </button>
-          <Link to='/log-in' className='text-center text-sm hover:underline hover:underline-offset-4'>
-            Got an account already?
-          </Link>
-        </form>
-        {isUser.userName && <p className='text-lg text-bluelight text-center font-bold'>User already exist</p>}
-        {isUser.email && <p className='text-lg text-bluelight text-center font-bold'>Email already exist</p>}
+    <div className='border bg-bluelight/5 border-bluelight border-dashed rounded-lg w-full p-6 max-w-7xl flex flex-col gap-3'>
+      <form 
+        className='flex items-center gap-6'
+        ref={form}
+        action='submit'
+      >
+        <input
+          type='text'
+          placeholder='Username'
+          name='username'
+          onChange={() => setIsUser({...isUser, userName: false})}
+          autoComplete='new-username'
+          className={`border ${isUser.userName ?'border-red':'border-bluelight'} rounded-md p-3 bg-transparent flex-grow `}
+        />
+        <input
+          type='email'
+          placeholder='Email'
+          name='email'
+          onChange={() => setIsUser({...isUser, email: false})}
+          autoComplete='new-email'
+          className={`border ${isUser.email ?'border-red':'border-bluelight'} rounded-md p-3 bg-transparent autofill:bg-transparent flex-grow`}
+        />
+        <input
+          type='password'
+          placeholder='Password'
+          name='password'
+          autoComplete='new-password'
+          className='border border-bluelight rounded-md p-3 bg-transparent autofill:bg-transparent flex-grow'
+        />
+      <button 
+        className='bg-bluelight text-white rounded-md p-3 flex-grow hover:bg-bluelight/20 text-xl font-semibold' 
+        onClick={(e) => handleSingUp(e)}
+        type='submit'
+      >
+          Sign Up
+      </button>
+      </form>
+      <div className='text-center text-sm hover:underline hover:underline-offset-4 cursor-pointer' onClick={() => setIsLogin(true)}>
+        Got an account already?
       </div>
-    </Layout>
+      {isUser.userName && <p className='text-lg text-bluelight text-center font-bold'>User already exist</p>}
+      {isUser.email && <p className='text-lg text-bluelight text-center font-bold'>Email already exist</p>}
+    </div>
   )
 }
