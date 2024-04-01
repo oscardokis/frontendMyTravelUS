@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 import { useRef, useState } from 'react'
+import { GeneralContext } from '../Components/Context'
+import { useContext } from 'react'
 
-export default function SignUp({ setIsLogin }) {
+export default function SignUp({ setIsLogin, navigateTo }) {
   const navigate = useNavigate()
+  const { setIsValidUser, setToken } = useContext(GeneralContext)
   const [isUser, setIsUser] = useState(
     {userName: false,
     email: false}
@@ -18,9 +21,10 @@ export default function SignUp({ setIsLogin }) {
         },
         body: JSON.stringify(data),
       }) 
-      if (!response.ok) throw new Error('Login failed');
+      if (!response.ok) throw new Error('Sign Up failed');
       const res = await response.json()
-      console.log(res)
+      setToken(res.token)
+      setIsValidUser(true)
       if(res === "username") return setIsUser({userName: true, email: false})
       if(res === "email") return setIsUser({userName: false, email: true})
       navigate("/");
@@ -49,6 +53,8 @@ export default function SignUp({ setIsLogin }) {
     if(SignUpInfo.password.length > 20) return alert('Password must be less than 20 characters long')
     if(SignUpInfo.email.length > 50) return alert('Email must be less than 50 characters long')
     userFetch(SignUpInfo)
+    navigate(navigateTo ?? '/')
+    
   }
   return (
     <div className='border bg-bluelight/5 border-bluelight border-dashed rounded-lg w-full p-6 max-w-7xl flex flex-col gap-3'>

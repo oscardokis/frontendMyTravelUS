@@ -24,18 +24,18 @@ export default function Navbar () {
         <p className="font text-3xl">TRAVEL<span className="font-black">US</span></p>
       </div>
       <ul className="flex gap-6 text-xl">
-        <li>
+        <li className=" hover:underline hover:underline-offset-3">
           <NavLink to="/">
             Home
           </NavLink>
         </li>
-        <li>
+        <li className=" hover:underline hover:underline-offset-3">
           <NavLink to="/journeys">
             Journeys
           </NavLink>
         </li>
         {isValidUser && (
-          <li>
+          <li className=" hover:underline hover:underline-offset-3">
             <NavLink to="/adventure">
               New Adventure
             </NavLink>
@@ -43,13 +43,13 @@ export default function Navbar () {
         
         )}
         {isValidUser && (
-          <li>
+          <li className=" hover:underline hover:underline-offset-3">
             <NavLink to="/my-trips">
               My Trips
             </NavLink>
           </li>
         )}
-        <li>
+        <li className=" hover:underline hover:underline-offset-3">
           {isValidUser ? (
             <NavLink 
               to="/"

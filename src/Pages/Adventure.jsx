@@ -8,6 +8,7 @@ export default function Adventure() {
   const form = useRef()
   const { setIsValidUser, token, setIsLogin, isLogin, isValidUser} = useContext(GeneralContext)
   const [adventures, setAdventures] = useState({status: false, data: []})
+  const [isLoading, setIsLoading] = useState(false)
 
   const [dropdownValue, setDropdownValue] = useState({
     state: '',
@@ -29,8 +30,8 @@ export default function Adventure() {
         throw new Error('Comment failed') 
       }
       const responseData = await response.json()
+      setIsLoading(false)
       setAdventures({status: true, data: responseData.thingsToDo})
-      console.log(responseData)
     } catch (error) {
       console.error(error)
     }
@@ -126,6 +127,7 @@ export default function Adventure() {
       activity: dropdownValue.activity
     }
     setAdventures({status: false, data: []})
+    setIsLoading(true)
     adventureFetch(adventure)
   }
   
@@ -190,7 +192,9 @@ export default function Adventure() {
             ))}
           </div>
         ): (
-          <p className='text-5xl '>Your discoveries are on the horizon...</p>
+          <div>
+            {isLoading ? <p className='text-5xl'>Loading...</p>: <p className='text-5xl '>Your discoveries are on the horizon...</p>}
+          </div>
         )}
       </div>
       </div>
