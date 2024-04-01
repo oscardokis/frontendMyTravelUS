@@ -8,6 +8,7 @@ import SignUp from './Pages/SignUp.jsx'
 import LogIn from './Pages/LogIn.jsx'
 import MyTrips from './Pages/MyTrips.jsx'
 import { GeneralProvider } from './Components/Context.jsx'
+import Footer from './Components/Footer.jsx'
 
 const AppRouter = () => {
   let routes = useRoutes([
@@ -29,6 +30,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <AppRouter />
+        <Footer />
       </BrowserRouter>
     </GeneralProvider>
   )

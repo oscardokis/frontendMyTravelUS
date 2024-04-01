@@ -141,8 +141,8 @@ export default function Adventure() {
       <div className='flex justify-between w-full gap-6 flex-wrap max-w-7xl'>
       <div className='border border-bluelight bg-bluelight/5 border-dashed rounded-lg w-full p-6 min-w-96'>
         <form ref={form} className='flex flex-col gap-6'>
-          <p className='text-center text-2xl'>Got a destination in mind?</p>
-          <div className='flex gap-6'>
+          <p className='text-center text-xl md:text-2xl'>Got a destination in mind?</p>
+          <div className='flex gap-6 flex-wrap'>
             <input
               type='text'
               placeholder='City or Location'
@@ -170,7 +170,7 @@ export default function Adventure() {
             </div>
           </div>
           <button 
-          className='rounded-md p-3 bg-bluelight hover:bg-bluelight/20 text-2xl'
+          className='rounded-md p-3 bg-bluelight hover:bg-bluelight/20 text-xl md:text-2xl'
           onClick={(e) => handleAdventure(e)}
           >Find Your Adventure</button>          
         </form>
@@ -193,7 +193,7 @@ export default function Adventure() {
           </div>
         ): (
           <div>
-            {isLoading ? <p className='text-5xl'>Loading...</p>: <p className='text-5xl '>Your discoveries are on the horizon...</p>}
+            {isLoading ? <p className='md:text-5xl text-xl'>Loading...</p>: <p className='md:text-5xl text-xl'>Your discoveries are on the horizon...</p>}
           </div>
         )}
       </div>

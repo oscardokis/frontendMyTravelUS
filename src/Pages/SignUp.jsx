@@ -57,9 +57,9 @@ export default function SignUp({ setIsLogin, navigateTo }) {
     
   }
   return (
-    <div className='border bg-bluelight/5 border-bluelight border-dashed rounded-lg w-full p-6 max-w-7xl flex flex-col gap-3'>
+    <div className='border bg-bluelight/5 border-bluelight border-dashed rounded-lg w-full p-6 max-w-7xl flex flex-col gap-3 mx-3'>
       <form 
-        className='flex items-center gap-6'
+        className='flex items-center gap-6 flex-wrap'
         ref={form}
         action='submit'
       >
@@ -84,10 +84,10 @@ export default function SignUp({ setIsLogin, navigateTo }) {
           placeholder='Password'
           name='password'
           autoComplete='new-password'
-          className='border border-bluelight rounded-md p-3 bg-transparent autofill:bg-transparent flex-grow'
+          className='border border-bluelight rounded-md p-3 bg-transparent autofill:bg-transparent flex-grow min-w-64'
         />
       <button 
-        className='bg-bluelight text-white rounded-md p-3 flex-grow hover:bg-bluelight/20 text-xl font-semibold' 
+        className='bg-bluelight text-white rounded-md p-3 flex-grow hover:bg-bluelight/20 text-xl font-semibold min-w-64' 
         onClick={(e) => handleSingUp(e)}
         type='submit'
       >
@@ -95,7 +95,7 @@ export default function SignUp({ setIsLogin, navigateTo }) {
       </button>
       </form>
       <div className='text-center text-sm hover:underline hover:underline-offset-4 cursor-pointer' onClick={() => setIsLogin(true)}>
-        Got an account already?
+        Got an account yet?
       </div>
       {isUser.userName && <p className='text-lg text-bluelight text-center font-bold'>User already exist</p>}
       {isUser.email && <p className='text-lg text-bluelight text-center font-bold'>Email already exist</p>}

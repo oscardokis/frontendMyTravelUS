@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function LogInForm({ setIsLogin, navigateTo }) {
   const navigate = useNavigate()
-  const { setIsValidUser, setToken } = useContext(GeneralContext)
+  const { setIsValidUser, setToken, setIsUser } = useContext(GeneralContext)
   const [isUserLogin, setIsUserLogin] = useState(
     {userName: false,
     password: false}
@@ -25,6 +25,7 @@ export default function LogInForm({ setIsLogin, navigateTo }) {
       const res = await response.json()
       if(res === "username") return setIsUserLogin({userName: true, password: false})
       if(res === "password") return setIsUserLogin({userName: false, password: true})
+      setIsUser(res.user.username)
       setToken(res.token)
       setIsValidUser(true)
     } catch (error) {
@@ -49,29 +50,29 @@ export default function LogInForm({ setIsLogin, navigateTo }) {
   }
   return (
     <div className='border border-bluelight bg-bluelight/5 border-dashed rounded-lg p-6 lg:flex lg:flex-col lg:gap-2 lg:w-full max-w-7xl'>
-        <form ref={form} className='flex gap-6 justify-center'>
+        <form ref={form} className='flex gap-6 justify-center flex-wrap'>
           {/* <h1 className='text-3xl font-bold text-center w-1/4'>Log In</h1> */}
           <input
             type='text'
             placeholder='Username'
             name='username'
             autoComplete='current-username'
-            className={`border ${isUserLogin.userName ?'border-red':'border-bluelight'} rounded-md p-3 bg-transparent w-2/6`}
+            className={`border ${isUserLogin.userName ?'border-red':'border-bluelight'} rounded-md p-3 bg-transparent w-2/6 flex-grow`}
           />
           <input
             type='password'
             placeholder='Password'
             name='password'
             autoComplete='current-password'
-            className={`border ${isUserLogin.password ?'border-red':'border-bluelight'} rounded-md p-3 bg-transparent w-2/6`}
+            className={`border ${isUserLogin.password ?'border-red':'border-bluelight'} rounded-md p-3 bg-transparent w-2/6 flex-grow`}
           />
           <button 
             onClick={(e) => handleLogIn(e)} 
-            className='bg-bluelight text-white font-semibold text-xl rounded-md p-3 w-2/6 hover:bg-bluelight/20'>
+            className='bg-bluelight text-white font-semibold text-xl rounded-md p-3 hover:bg-bluelight/20 flex-grow'>
             Log In
           </button>
         </form>
-        <div to='/sign-up' className='text-center text-sm hover:underline hover:underline-offset-4 cursor-pointer' onClick={() => setIsLogin(false)}>
+        <div to='/sign-up' className='text-center text-sm hover:underline hover:underline-offset-4 cursor-pointer mt-3 md:mt-0' onClick={() => setIsLogin(false)}>
             No account yet? <span className=' font-semibold'>Create one here</span>.
         </div>
         {isUserLogin.userName && <p className='text-lg text-bluelight text-center font-bold'>Oops, we can&apos;t find that username.</p>}

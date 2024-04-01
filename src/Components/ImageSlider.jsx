@@ -53,11 +53,11 @@ const ImageSlider = ({ images }) => {
         ))}
       </div>
       <div>
-        <p className="text-white text-4xl font-semibold p-3 absolute top-16 left-16 bg-black/50 rounded-3xl">
+        <p className="text-white text-md lg:text-4xl font-semibold p-3 absolute top-4 left-4 md:top-16 md:left-16 bg-black/50 rounded-3xl">
           {images[imageIndex].city}</p>
       </div>
       <div>
-        <p className="text-white text-2xl font-semibold p-3 absolute bottom-16 right-2/4 translate-x-1/2 bg-black/50 rounded-3xl">
+        <p className="text-white text-sm lg:text-2xl font-semibold p-3 absolute bottom-16 right-2/4 translate-x-1/2 bg-black/50 rounded-3xl">
           {images[imageIndex].description}</p>
       </div>
       <button 

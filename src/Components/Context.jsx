@@ -5,6 +5,7 @@ export const GeneralContext = createContext()
 
 export const GeneralProvider = ({children}) => {
   const [isValidUser, setIsValidUser] = useState(false)
+  const [isUser, setIsUser] = useState(null)
   const [isLogin, setIsLogin] = useState(true)
   const [token, setToken] = useState(null);
 
@@ -16,7 +17,9 @@ export const GeneralProvider = ({children}) => {
       token,
       setToken,
       isLogin,
-      setIsLogin
+      setIsLogin,
+      isUser,
+      setIsUser
     }}>
       {children}
     </GeneralContext.Provider>

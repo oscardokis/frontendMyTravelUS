@@ -29,7 +29,7 @@ export default function MyTrips() {
       <div className='flex flex-col gap-6 w-full max-w-7xl '>
         {myTrips?.map((trip, index) => (
           <div key={index} className='p-3 border border-bluelight border-dashed rounded mb-6 '>
-            <div className='border border-bluelight border-dashed bg-bluelight/5 flex p-3 rounded-lg justify-around mb-3'>
+            <div className='border border-bluelight border-dashed bg-bluelight/5 flex flex-wrap gap-3 md:gap-0 p-3 rounded-lg justify-around mb-3'>
               <h2 className='text-xl font-medium bg-bluelight/10 rounded-lg p-3'>{trip.city}, {trip.state}</h2>
               <p className='text-xl bg-bluelight/10 rounded-lg p-3'><span className='text-xl font-medium'>Accessories: </span> {trip.activity}</p>
               <p className='text-xl bg-bluelight/10 rounded-lg p-3'><span className='text-xl font-medium'>Month: </span>  {trip.month}</p>

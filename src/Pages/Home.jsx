@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <p className='text-4xl mb-6 font-semibold'>Discover where you&apos;re headed next</p>
+      <p className='text-4xl mb-6 font-semibold text-center'>Discover where you&apos;re headed next</p>
       {!isValidUser && 
         <div className='flex justify-center w-full mb-6'>
            {!isLogin ? <SignUp setIsLogin={(x) => setIsLogin(x)} />: (<LogInForm setIsLogin={(x) => setIsLogin(x)}/>)}

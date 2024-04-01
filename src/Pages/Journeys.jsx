@@ -76,19 +76,19 @@ export default function Journeys() {
   }
   return (
     <Layout>
-      <div className='flex px-6 justify-center items-start gap-6 flex-wrap sm:flex-nowrap max-w-7xl w-full lg:flex-col'>
+      <div className='flex px-6 justify-center items-start gap-6 flex-wrap max-w-7xl w-full lg:flex-col'>
       {isValidUser ? (
-        <div className='border border-bluelight bg-bluelight/5 border-dashed rounded-lg p-6 mt-6 lg:w-full'>
-          <p className='text-center text-2xl mb-3'>Do you have any reflections on the journey?</p>
+        <div className='border border-bluelight bg-bluelight/5 border-dashed rounded-lg p-6 mt-6 md:w-full'>
+          <p className='text-center tex-xl md:text-2xl mb-3'>Do you have any reflections on the journey?</p>
           <form ref={form} className='flex flex-col gap-3 w-full'>
-            <div className='flex gap-6'>
+            <div className='flex gap-6 flex-wrap'>
               <input
                 type='text'
                 placeholder='Title of the journey'
                 name='titleJourney'
                 className='border border-bluelight border-dashed rounded-md p-3 bg-transparent flex-grow'
               />
-              <div className='border border-bluelight border-dashed rounded-md p-3 bg-transparent flex-grow'>
+              <div className='border border-bluelight border-dashed rounded-md bg-transparent flex-grow'>
                 <Dropdown 
                   options={activities}
                   setDropdownValue={setDropdownValue}
@@ -125,12 +125,12 @@ export default function Journeys() {
           return (
             <div key={index} className='border border-bluelight bg-bluelight/5 border-dashed rounded-lg w-full p-6 relative'>
               <div className='flex item gap-6'>
-                <h2 className='text-3xl'>{journey.titleJourney}</h2>
+                <h2 className='text-xl md:text-3xl '>{journey.titleJourney}</h2>
               </div>
               <p className='text-xl'>{journey.typeJourney}</p>
               <p>{journey.locationJourney}</p>
               <p>{journey.descriptionJourney}</p>
-              <p className='absolute top-3 right-3 bg-bluelight/20 p-3 rounded-lg'>{journey.user.username}</p>
+              <p className='absolute top-3 text-sm right-3 bg-bluelight/20 p-3 rounded-lg'>{journey.user.username}</p>
             </div>
           )
         })}
