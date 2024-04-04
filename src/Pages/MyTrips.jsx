@@ -7,7 +7,7 @@ export default function MyTrips() {
   useEffect(() => {
     const fetchMyTrips = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/v1/my-trips', {
+        const response = await fetch('https://travelus-9ca2f8ce253e.herokuapp.com/api/v1/my-trips', {
           method: 'GET',
           headers: { 'Authorization': `Bearer ${authUser.token}` }
         })

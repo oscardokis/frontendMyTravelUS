@@ -48,7 +48,7 @@ export default function SignUp({ setIsLogin, navigateTo }) {
     if(signupInfo.username.length > 20) return alert('Username must be less than 20 characters long')
     if(signupInfo.password.length > 20) return alert('Password must be less than 20 characters long')
     if(signupInfo.email.length > 50) return alert('Email must be less than 50 characters long')
-    await fetchRequest('http://localhost:3001/api/v1/user/signup', 'POST', signupInfo, null);
+    await fetchRequest('https://travelus-9ca2f8ce253e.herokuapp.com/api/v1/user/signup', 'POST', signupInfo, null);
 
   }
   return (

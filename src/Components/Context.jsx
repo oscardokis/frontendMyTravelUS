@@ -17,7 +17,7 @@ export const GeneralProvider = ({children}) => {
   useEffect(() => {
     const checkToken = async () => {
       if(storedValue !== '') {
-        const response = await fetch('http://localhost:3001/api/v1/auth/validate', {
+        const response = await fetch('https://travelus-9ca2f8ce253e.herokuapp.com/api/v1/auth/validate', {
           method: 'GET',
           headers: { 'Authorization': `Bearer ${storedValue}` }
         })

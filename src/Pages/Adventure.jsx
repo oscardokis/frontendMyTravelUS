@@ -24,7 +24,7 @@ export default function Adventure() {
 
   // const adventureFetch = async (data) => {
   //   try {
-  //     const response = await fetch('http://localhost:3001/api/v1/adventure', {
+  //     const response = await fetch('https://travelus-9ca2f8ce253e.herokuapp.com/api/v1/adventure', {
   //       method: 'POST',
   //       headers: {
   //         'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ export default function Adventure() {
       activity: dropdownValue.activity
     }
     setAdventures({status: false, data: []})
-    await fetchRequest('http://localhost:3001/api/v1/adventure', 'POST', adventure, authUser.token)
+    await fetchRequest('https://travelus-9ca2f8ce253e.herokuapp.com/api/v1/adventure', 'POST', adventure, authUser.token)
 
   }
   return (

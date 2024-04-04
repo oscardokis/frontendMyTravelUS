@@ -14,7 +14,6 @@ export default function LogInForm({ setIsLogin, navigateTo }) {
 
   useEffect(() => {
     if(data?.token) {
-      console.log(data.token)
       setAuthUser({
         username: data.user.username,
         login: true,
@@ -39,7 +38,7 @@ export default function LogInForm({ setIsLogin, navigateTo }) {
     if(loginInfo.username.length < 3) return alert('Username must be at least 3 characters long')
     if(loginInfo.username.length > 20) return alert('Username must be less than 20 characters long')
 
-    await fetchRequest('http://localhost:3001/api/v1/auth/login', 'POST', loginInfo, null)
+    await fetchRequest('https://travelus-9ca2f8ce253e.herokuapp.com/api/v1/auth/login', 'POST', loginInfo, null)
 
   }
   return (
