@@ -1,14 +1,18 @@
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { GeneralContext } from './Context.jsx'
 import { useNavigate } from 'react-router-dom'
 import { useLocalStorage } from './../hooks/useLocalStorage'
 import { useFetchWithAuth } from './../hooks/useFetchWithAuth'
+import EyeOpen from '../assets/EyeOpen.svg'
+import EyeClose from '../assets/EyeClose.svg'
 
 export default function LogInForm({ setIsLogin, navigateTo }) {
   const navigate = useNavigate()
   const { setAuthUser } = useContext(GeneralContext)
   const [, setStoredValue] = useLocalStorage('token', '');
   const { fetchRequest, data, isLoading, error } = useFetchWithAuth();
+  const [passwordToggle, setPasswordToggle] = useState(false)
+
 
   const form = useRef()
 
@@ -41,6 +45,16 @@ export default function LogInForm({ setIsLogin, navigateTo }) {
     await fetchRequest('https://travelus-9ca2f8ce253e.herokuapp.com/api/v1/auth/login', 'POST', loginInfo, null)
 
   }
+  function handlePasswordToggle(e) {
+    e.preventDefault()
+    setPasswordToggle(!passwordToggle)
+    const passwordInput = form.current.querySelector('input[name="password"]')
+    if(passwordToggle) {
+      passwordInput.type = 'password'
+    } else {
+      passwordInput.type = 'text'
+    }
+  }
   return (
     <div className='border border-bluelight bg-bluelight/5 border-dashed rounded-lg p-6 lg:flex lg:flex-col lg:gap-2 lg:w-full max-w-7xl'>
         <form ref={form} className='flex gap-6 justify-center flex-wrap'>
@@ -49,15 +63,20 @@ export default function LogInForm({ setIsLogin, navigateTo }) {
             placeholder='Username'
             name='username'
             autoComplete='current-username'
-            className={`border border-bluelight rounded-md p-3 bg-transparent w-2/6 flex-grow`}
+            className={`border border-bluelight rounded-md p-3 bg-transparent flex-grow`}
           />
+        <label className='relative min-w-64 flex-grow '>
           <input
             type='password'
             placeholder='Password'
             name='password'
-            autoComplete='current-password'
-            className={`border border-bluelight rounded-md p-3 bg-transparent w-2/6 flex-grow`}
+            autoComplete='new-password'
+            className='border border-bluelight rounded-md p-3 bg-transparent autofill:bg-transparent w-full'
           />
+          <button className='w-7 absolute right-2 top-2/4 -translate-y-1/2' onClick={(e) => handlePasswordToggle(e)}>
+            { passwordToggle ? <img src={EyeOpen} alt='Show Password'/> : <img src={EyeClose} alt='Hide Password'/>}
+          </button>
+        </label>
           <button 
             onClick={(e) => handleLogIn(e)} 
             className='bg-bluelight text-white font-semibold text-xl rounded-md p-3 hover:bg-bluelight/20 flex-grow'>
