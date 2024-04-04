@@ -33,8 +33,8 @@ export default function SignUp({ setIsLogin, navigateTo }) {
     e.preventDefault()
     const formData = new FormData(form.current)
     const signupInfo = {
-      username: formData.get('username').trim(),
-      email: formData.get('email').trim(),
+      username: formData.get('username').trim().toLowerCase(),
+      email: formData.get('email').trim().toLowerCase(),
       password: formData.get('password').trim()
     }
 
