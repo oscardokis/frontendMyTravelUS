@@ -29,7 +29,7 @@ export default function LogInForm({ setIsLogin, navigateTo }) {
     e.preventDefault()
     const formData = new FormData(form.current)
     const loginInfo = {
-      username: formData.get('username').trim().tolowercase(),
+      username: formData.get('username').trim().toLowerCase(),
       password: formData.get('password').trim()
     }
 
