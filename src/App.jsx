@@ -28,9 +28,13 @@ function App() {
   return (
     <GeneralProvider>
       <BrowserRouter>
-        <Navbar />
-        <AppRouter />
-        <Footer />
+        <div className='flex min-h-screen flex-col '>
+          <Navbar />
+          <div className='flex-grow'> 
+            <AppRouter />
+          </div>
+          <Footer />
+        </div>
       </BrowserRouter>
     </GeneralProvider>
   )

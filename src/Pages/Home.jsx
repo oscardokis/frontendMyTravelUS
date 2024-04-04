@@ -6,12 +6,11 @@ import { useContext } from 'react'
 import { GeneralContext } from '../Components/Context.jsx'
 import SignUp from './SignUp.jsx'
 export default function Home() { 
-  const { isValidUser, setIsLogin, isLogin } = useContext(GeneralContext)
-
+  const { setIsLogin, isLogin, authUser } = useContext(GeneralContext)
   return (
     <Layout>
       <p className='text-4xl mb-6 font-semibold text-center'>Discover where you&apos;re headed next</p>
-      {!isValidUser && 
+      {!authUser.login && 
         <div className='flex justify-center w-full mb-6'>
            {!isLogin ? <SignUp setIsLogin={(x) => setIsLogin(x)} />: (<LogInForm setIsLogin={(x) => setIsLogin(x)}/>)}
         </div>

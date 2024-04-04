@@ -1,41 +1,47 @@
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import Dropdown from '../Components/Dropdown.jsx'
 import Layout from '../Components/Layout.jsx'
 import { GeneralContext } from '../Components/Context.jsx'
 import SignUp from './SignUp.jsx'
 import LogInForm from '../Components/LogInForm.jsx'
+import { useFetchWithAuth } from '../hooks/useFetchWithAuth'
 export default function Adventure() {
   const form = useRef()
-  const { setIsValidUser, token, setIsLogin, isLogin, isValidUser} = useContext(GeneralContext)
+  const { setIsLogin, isLogin, authUser } = useContext(GeneralContext)
   const [adventures, setAdventures] = useState({status: false, data: []})
-  const [isLoading, setIsLoading] = useState(false)
+  const { fetchRequest, data, isLoading, error } = useFetchWithAuth();
 
   const [dropdownValue, setDropdownValue] = useState({
     state: '',
     month: '',
     activity: ''
   })
-  const adventureFetch = async (data) => {
-    try {
-      const response = await fetch('http://localhost:3001/api/v1/adventure', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(data),
-      })
-      if (!response.ok){
-        if(response.status === 401) setIsValidUser(false)
-        throw new Error('Comment failed') 
-      }
-      const responseData = await response.json()
-      setIsLoading(false)
-      setAdventures({status: true, data: responseData.thingsToDo})
-    } catch (error) {
-      console.error(error)
+  useEffect(() => {
+    if(data?.thingsToDo) {
+      setAdventures({status: true, data: data.thingsToDo})
     }
-  } 
+  }, [data])
+
+  // const adventureFetch = async (data) => {
+  //   try {
+  //     const response = await fetch('http://localhost:3001/api/v1/adventure', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `Bearer ${token}`
+  //       },
+  //       body: JSON.stringify(data),
+  //     })
+  //     if (!response.ok){
+  //       throw new Error('Comment failed') 
+  //     }
+  //     const responseData = await response.json()
+  //     setIsLoading(false)
+  //     setAdventures({status: true, data: responseData.thingsToDo})
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // } 
   const states = [
     "Alabama",
     "Alaska",
@@ -117,7 +123,7 @@ export default function Adventure() {
     "Sailing",
     "Any activity"
   ]
-  const handleAdventure = (e) => {
+  const handleAdventure = async (e) => {
     e.preventDefault()
     const formData = new FormData(form.current)
     const adventure = {
@@ -127,13 +133,12 @@ export default function Adventure() {
       activity: dropdownValue.activity
     }
     setAdventures({status: false, data: []})
-    setIsLoading(true)
-    adventureFetch(adventure)
+    await fetchRequest('http://localhost:3001/api/v1/adventure', 'POST', adventure, authUser.token)
+
   }
-  
   return (
     <Layout>
-      {!isValidUser && 
+      {!authUser.login && 
         <div className='flex justify-center w-full mb-6'>
            {!isLogin ? <SignUp setIsLogin={(x) => setIsLogin(x)} />: (<LogInForm setIsLogin={(x) => setIsLogin(x)}/>)}
         </div>
@@ -194,6 +199,9 @@ export default function Adventure() {
         ): (
           <div>
             {isLoading ? <p className='md:text-5xl text-xl'>Loading...</p>: <p className='md:text-5xl text-xl'>Your discoveries are on the horizon...</p>}
+            {
+              error && <p className='text-xl'>Error: {error}</p>
+            }
           </div>
         )}
       </div>

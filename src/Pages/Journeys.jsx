@@ -23,17 +23,16 @@ const activities = [
 export default function Journeys() {
   const [comments, setComments] = useState([])
   const [dropdownValue, setDropdownValue] = useState()
-  const { isValidUser, setIsValidUser, isLogin, setIsLogin, token} = useContext(GeneralContext)
+  const { authUser, setAuthUser, isLogin, setIsLogin} = useContext(GeneralContext)
   const form = useRef()
   useEffect(() => {
     const fetchComments = async () => {
       try {
         const response = await fetch('http://localhost:3001/api/v1/comments/all', {
           method: 'GET',
-          headers: { 'Authorization': `Bearer ${token}` }
+          headers: { 'Authorization': `Bearer ${authUser.token}` }
         })
         if (!response.ok){
-          if(response.status === 401) setIsValidUser(false)
           throw new Error('Comments failed')
         }
         const data = await response.json()
@@ -43,19 +42,19 @@ export default function Journeys() {
       }
     }
     fetchComments()
-  }, [token, setIsValidUser, setComments, comments])
+  }, [authUser, setComments, comments])
   const commentFetch = async (data) => {
     try {
       const response = await fetch('http://localhost:3001/api/v1/comments', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${authUser.token}`
         },
         body: JSON.stringify(data),
       })
       if (!response.ok){
-        if(response.status === 401) setIsValidUser(false)
+        if(response.status === 401) setAuthUser({username: null, login: false, token: null, id: null})
         throw new Error('Comment failed') 
       }
     } catch (error) {
@@ -77,7 +76,7 @@ export default function Journeys() {
   return (
     <Layout>
       <div className='flex px-6 justify-center items-start gap-6 flex-wrap max-w-7xl w-full lg:flex-col'>
-      {isValidUser ? (
+      {authUser.login ? (
         <div className='border border-bluelight bg-bluelight/5 border-dashed rounded-lg p-6 mt-6 md:w-full'>
           <p className='text-center tex-xl md:text-2xl mb-3'>Do you have any reflections on the journey?</p>
           <form ref={form} className='flex flex-col gap-3 w-full'>

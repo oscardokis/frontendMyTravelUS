@@ -2,17 +2,16 @@ import Layout from '../Components/Layout'
 import { useContext, useEffect, useState } from 'react'
 import { GeneralContext } from '../Components/Context'
 export default function MyTrips() {
-  const {token, setIsValidUser} = useContext(GeneralContext)
+  const {authUser} = useContext(GeneralContext)
   const [myTrips, setMyTrips] = useState([])
   useEffect(() => {
     const fetchMyTrips = async () => {
       try {
         const response = await fetch('http://localhost:3001/api/v1/my-trips', {
           method: 'GET',
-          headers: { 'Authorization': `Bearer ${token}` }
+          headers: { 'Authorization': `Bearer ${authUser.token}` }
         })
         if (!response.ok){
-          if(response.status === 401) setIsValidUser(false)
           throw new Error('My trips failed')
         }
         const data = await response.json()
@@ -22,7 +21,7 @@ export default function MyTrips() {
       }
     }
     fetchMyTrips()
-  }, [token, setIsValidUser, setMyTrips])
+  }, [authUser, setMyTrips])
   return (
     <Layout>
       <h1 className='p-3 text-4xl font-extrabold'>MY TRIPS</h1>
@@ -34,7 +33,6 @@ export default function MyTrips() {
               <p className='text-xl bg-bluelight/10 rounded-lg p-3'><span className='text-xl font-medium'>Accessories: </span> {trip.activity}</p>
               <p className='text-xl bg-bluelight/10 rounded-lg p-3'><span className='text-xl font-medium'>Month: </span>  {trip.month}</p>
             </div>
-            {/* <h3>Things to do</h3> */}
             <ul className='border border-bluelight border-dashed bg-bluelight/5 rounded-lg p-6 flex flex-col gap-3'>
               {trip.thingsToDo.map((thing, index) => (
                 <li key={index} className=' bg-bluelight/10 rounded-lg p-6'>

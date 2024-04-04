@@ -1,25 +1,50 @@
-import { createContext, useState } from "react";
-
+/* eslint-disable react-hooks/exhaustive-deps */
+import { createContext, useEffect, useState } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export const GeneralContext = createContext()
 
 export const GeneralProvider = ({children}) => {
-  const [isValidUser, setIsValidUser] = useState(false)
   const [isUser, setIsUser] = useState(null)
   const [isLogin, setIsLogin] = useState(true)
-  const [token, setToken] = useState(null);
+  const [storedValue, setStoredValue] = useLocalStorage('token', '');
+  const [authUser, setAuthUser] = useState({
+    username: '',
+    login: false,
+    token: '',
+    id: ''
+  });
+  useEffect(() => {
+    const checkToken = async () => {
+      if(storedValue !== '') {
+        const response = await fetch('http://localhost:3001/api/v1/auth/validate', {
+          method: 'GET',
+          headers: { 'Authorization': `Bearer ${storedValue}` }
+        })
+        if(response.ok) {
+          const dataFetch = await response.json()
+          setAuthUser({
+            username: dataFetch.user.username,
+            login: true,
+            token: storedValue,
+            id: dataFetch.user.id
+          }); // Save data in local storage
+        }
+      }
+    }
+    checkToken();
+  }, [storedValue]);
 
 
   return (
     <GeneralContext.Provider value={{
-      isValidUser,
-      setIsValidUser,
-      token,
-      setToken,
       isLogin,
       setIsLogin,
       isUser,
-      setIsUser
+      setIsUser,
+      authUser,
+      setAuthUser,
+      setStoredValue
     }}>
       {children}
     </GeneralContext.Provider>
