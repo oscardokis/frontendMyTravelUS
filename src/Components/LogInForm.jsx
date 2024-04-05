@@ -65,7 +65,7 @@ export default function LogInForm({ setIsLogin, navigateTo }) {
             autoComplete='current-username'
             className={`border border-bluelight rounded-md p-3 bg-transparent flex-grow`}
           />
-        <label className='relative min-w-64 flex-grow '>
+        <label className='relative min-w-72 md:min-w-fit flex-grow '>
           <input
             type='password'
             placeholder='Password'
