@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Layout from '../Components/Layout.jsx'
 import Dropdown from '../Components/Dropdown.jsx'
 import { useContext, useEffect, useRef, useState } from 'react'
@@ -42,7 +43,7 @@ export default function Journeys() {
       }
     }
     fetchComments()
-  }, [authUser, setComments, comments])
+  }, [])
   const commentFetch = async (data) => {
     try {
       const response = await fetch('https://travelus-9ca2f8ce253e.herokuapp.com/api/v1/comments', {
