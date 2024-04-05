@@ -4,9 +4,17 @@ import DotFill from '../assets/DotFill.svg'
 import DotEmpty from '../assets/DotEmpty.svg'
 import LeftArrow from '../assets/leftArrow.svg'
 import RightArrow from '../assets/rightArrow.svg'
+import { useSwipeable } from 'react-swipeable';
+
 const ImageSlider = ({ images }) => {
   const [imageIndex, setImageIndex] = useState(0);
-
+  const handlers = useSwipeable({
+    onSwipedLeft: () => showNextImage(),
+    onSwipedRight: () => showPreviousImage(),
+    // onSwipedUp: () => console.log('Swiped up'),
+    // onSwipedDown: () => console.log('Swiped down'),
+    // Configure more options here
+  });
   useEffect(() => {
     const interval = setInterval(() => {
       setImageIndex( index => {
@@ -39,7 +47,7 @@ const ImageSlider = ({ images }) => {
   }
   return(
     <div
-    className='w-full h-full'>
+    className='w-full h-full' {...handlers}>
       <div className="w-full h-full flex overflow-hidden">
         {images.map((image, index) => (
           <img 
@@ -64,12 +72,14 @@ const ImageSlider = ({ images }) => {
         onClick={showNextImage} 
         className="img-slider-btn w-16 h-full block absolute top-1/2 right-0 border-none cursor-pointer p-6 -translate-y-1/2 hover:bg-black/50 transition-opacity"
         aria-label="View next Image">
-        <img src={RightArrow} /></button>
+        <img src={RightArrow} />
+      </button>
       <button 
         onClick={showPreviousImage} 
         className="img-slider-btn w-16 h-full block absolute top-1/2 border-none cursor-pointer p-6 -translate-y-1/2 hover:bg-black/50"
         aria-label="View previews Image">
-        <img src={LeftArrow}/></button>
+        <img src={LeftArrow}/>
+      </button>
       <div className="absolute bottom-3 left-2/4 -translate-x-2/4 flex gap-3 bg-black/50 p-3 rounded-3xl">
         {images.map((url, index) => (
           <button 
