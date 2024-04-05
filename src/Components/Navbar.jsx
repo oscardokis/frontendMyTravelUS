@@ -9,7 +9,7 @@ export default function Navbar () {
   const handleLogOut = async () => {
     window.localStorage.removeItem('token')
     setAuthUser({
-      username: null,
+      username: '',
       login: false,
       token: null,
       id: null
@@ -23,7 +23,7 @@ export default function Navbar () {
         </figure>
         <div className="flex items-center rounded-lg p-2 gap-3">
           <p className="font text-3xl">TRAVEL<span className="font-black">US</span></p>
-            {authUser.login && (<li className="hidden text-pretty rounded-lg md:flex justify-center items-center text-2xl font-bold p-3">{authUser.username}</li>)}
+            {authUser.login && (<div className="hidden text-pretty rounded-lg md:flex justify-center items-center text-2xl font-bold p-3">{authUser.username}</div>)}
         </div>
 
       </div>
