@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import { GeneralContext } from '../Components/Context'
@@ -24,7 +25,7 @@ export default function SignUp({ setIsLogin, navigateTo }) {
       setStoredValue(data.token);
       navigate(navigateTo ?? '/')
     }
-  }, [data, setAuthUser, navigate, navigateTo, setStoredValue]);
+  }, [data]);
 
 
   const handleSingUp = async (e) => {

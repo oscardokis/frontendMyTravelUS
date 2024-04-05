@@ -33,7 +33,7 @@ export const GeneralProvider = ({children}) => {
       }
     }
     checkToken();
-  }, [storedValue]);
+  }, []);
 
 
   return (

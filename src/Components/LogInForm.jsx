@@ -27,7 +27,8 @@ export default function LogInForm({ setIsLogin, navigateTo }) {
       setStoredValue(data.token);
       navigate(navigateTo ?? '/')
     }
-  }, [data, setAuthUser, navigate, navigateTo, setStoredValue]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   const handleLogIn = async (e) => {
     e.preventDefault()

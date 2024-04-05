@@ -10,9 +10,7 @@ const ImageSlider = ({ images }) => {
   const [imageIndex, setImageIndex] = useState(0);
   const handlers = useSwipeable({
     onSwipedLeft: () => showNextImage(),
-    onSwipedRight: () => showPreviousImage(),
-    // onSwipedUp: () => console.log('Swiped up'),
-    // onSwipedDown: () => console.log('Swiped down'),
+    onSwipedRight: () => showPreviousImage()
     // Configure more options here
   });
   useEffect(() => {
