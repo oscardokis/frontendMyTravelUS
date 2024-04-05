@@ -1,7 +1,7 @@
 import { useRoutes, BrowserRouter } from 'react-router-dom'
 import './App.css'
 import Home from './Pages/Home'
-import Journeys from './Pages/Journeys'
+import Comments from './Pages/Comments'
 import Adventure from './Pages/Adventure.jsx'
 import Navbar from './Components/Navbar.jsx'
 import SignUp from './Pages/SignUp.jsx'
@@ -13,7 +13,7 @@ import Footer from './Components/Footer.jsx'
 const AppRouter = () => {
   let routes = useRoutes([
     { path: '/', element: <Home /> },
-    { path: '/journeys', element: <Journeys /> },
+    { path: '/comments', element: <Comments /> },
     { path: '/adventure', element: <Adventure /> },
     { path: '/sign-up', element: <SignUp /> },
     { path: '/log-in', element: <LogIn /> },

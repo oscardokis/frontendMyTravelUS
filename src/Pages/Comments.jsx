@@ -21,7 +21,7 @@ const activities = [
   "Any activity"
 ]
 
-export default function Journeys() {
+export default function Comments() {
   const [comments, setComments] = useState([])
   const [dropdownValue, setDropdownValue] = useState()
   const { authUser, setAuthUser, isLogin, setIsLogin} = useContext(GeneralContext)
@@ -117,7 +117,7 @@ export default function Journeys() {
         </div>
       ): (
           <div className='flex justify-center w-full'>
-            {!isLogin ? <SignUp setIsLogin={(x) => setIsLogin(x)} />: (<LogInForm setIsLogin={(x) => setIsLogin(x)} navigateTo="/journeys"/>)}
+            {!isLogin ? <SignUp setIsLogin={(x) => setIsLogin(x)} />: (<LogInForm setIsLogin={(x) => setIsLogin(x)} navigateTo="/comments"/>)}
           </div>
       )}
       <div className='flex flex-col w-full gap-6'>

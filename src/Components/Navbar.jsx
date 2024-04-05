@@ -40,8 +40,8 @@ export default function Navbar () {
             </NavLink>
           </li>
           <li className=" hover:underline hover:underline-offset-3 bg-bluelight p-2 rounded-lg w-full text-center" onClick={() => setBurgerButton(!burgerButton)}>
-            <NavLink to="/journeys" className="flex justify-center flex-grow">
-              Journeys
+            <NavLink to="/comments" className="flex justify-center flex-grow">
+              Comments
             </NavLink>
           </li>
           {authUser.login && (
@@ -85,8 +85,8 @@ export default function Navbar () {
           </NavLink>
         </li>
         <li className=" hover:underline hover:underline-offset-3">
-          <NavLink to="/journeys">
-            Journeys
+          <NavLink to="/comments">
+            Comments
           </NavLink>
         </li>
         {authUser.login && (
