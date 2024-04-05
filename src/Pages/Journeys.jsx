@@ -115,7 +115,7 @@ export default function Journeys() {
           </form>
         </div>
       ): (
-          <div className='flex w-full'>
+          <div className='flex justify-center w-full'>
             {!isLogin ? <SignUp setIsLogin={(x) => setIsLogin(x)} />: (<LogInForm setIsLogin={(x) => setIsLogin(x)} navigateTo="/journeys"/>)}
           </div>
       )}

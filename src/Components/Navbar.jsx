@@ -1,8 +1,10 @@
 import { NavLink } from "react-router-dom"
 import { GeneralContext } from "./Context"
 import { useContext, useState } from "react"
+import { useNavigate } from "react-router-dom"
 export default function Navbar () {
-  const { authUser, setAuthUser, isUser } = useContext(GeneralContext)
+  const navigate = useNavigate()
+  const { authUser, setAuthUser } = useContext(GeneralContext)
   const [burgerButton, setBurgerButton] = useState(false)
   const handleLogOut = async () => {
     window.localStorage.removeItem('token')
@@ -15,19 +17,24 @@ export default function Navbar () {
   }
   return (
     <nav className="flex justify-between items-center backdrop-blur text-white fixed z-10 top-0 h-24 px-6 py-1 w-full">
-      <div className="flex gap-3 items-center">
-        <figure className="w-20">
+      <div className="flex gap-3 items-center" onClick={()=> navigate('/')}>
+        <figure className="w-20" >
           <img className="w-full" src="/TravelUS5.svg" alt="logo TravelUS" />
         </figure>
-        <p className="font text-3xl">TRAVEL<span className="font-black">US</span></p>
+        <div className="flex items-center rounded-lg p-2 gap-3">
+          <p className="font text-3xl">TRAVEL<span className="font-black">US</span></p>
+            {authUser.login && (<li className="hidden text-pretty rounded-lg md:flex justify-center items-center text-2xl font-bold p-3">{authUser.username}</li>)}
+        </div>
+
       </div>
       <button className="w-10 lg:hidden relative" onClick={() => setBurgerButton(!burgerButton)}>
           <img className="w-full" src="/ButtonBurger.svg" alt="Burger Button" />
       </button>
       {burgerButton && (
-        <ul className="flex flex-col gap-3 text-lg justify-center items-center absolute right-4 top-20 bg-bluelight/10 p-3 rounded-lg">
-          {authUser.login && (<li className=" font-bold lg:mr-5 bg-bluelight p-2 rounded-lg flex justify-center items-center w-full">{isUser}</li>)}
-          <li className="hover:underline hover:underline-offset-3 bg-bluelight p-2 rounded-lg w-full text-center" onClick={() => setBurgerButton(!burgerButton)}>
+        <ul className="flex flex-col gap-3 text-lg justify-center items-center absolute right-4 top-20 bg-[#0f172a] p-3 rounded-lg min-w-36">
+          {authUser.login && (<li className=" font-bold bg-bluelight/45 p-2 rounded-lg flex justify-center items-center w-full">{authUser.username}</li>)}
+          <li className="hover:underline hover:underline-offset-3 bg-bluelight p-2 rounded-lg w-full text-center"
+           onClick={() => setBurgerButton(!burgerButton)}>
             <NavLink to="/" className="flex justify-center flex-grow">
               Home
             </NavLink>
@@ -69,7 +76,6 @@ export default function Navbar () {
         </ul>
       )}
       <ul className="hidden lg:flex lg:gap-6 text-xl lg:items-center">
-        {authUser.login && (<li className=" font-bold mr-5">{isUser}</li>)}
         <li className="flex justify-center items-center p-3" onClick={() => setBurgerButton(!burgerButton)}>
 
         </li>

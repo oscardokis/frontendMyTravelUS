@@ -56,7 +56,7 @@ export default function LogInForm({ setIsLogin, navigateTo }) {
     }
   }
   return (
-    <div className='border border-bluelight bg-bluelight/5 border-dashed rounded-lg p-6 lg:flex lg:flex-col lg:gap-2 lg:w-full max-w-7xl'>
+    <div className='border border-bluelight bg-bluelight/5 border-dashed rounded-lg p-6 lg:flex lg:flex-col lg:gap-2 w-full max-w-7xl'>
         <form ref={form} className='flex gap-6 justify-center flex-wrap'>
           <input
             type='text'
