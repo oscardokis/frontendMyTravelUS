@@ -16,17 +16,12 @@ export default function SignUp({ setIsLogin, navigateTo }) {
   useEffect(() => {
     if(data?.token) {
       setAuthUser({
-        username: data.user.username,
+        username: data.user.username ? data.user.username : '',
         login: true,
         token: data.token,
         id: data.user.id
       })
-      setStoredValue({
-        username: data.user.username,
-        login: true,
-        token: data.token,
-        id: data.user.id
-      });
+      setStoredValue(data.token);
       navigate(navigateTo ?? '/')
     }
   }, [data, setAuthUser, navigate, navigateTo, setStoredValue]);
