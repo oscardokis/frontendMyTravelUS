@@ -21,27 +21,7 @@ export default function Adventure() {
       setAdventures({status: true, data: data.thingsToDo})
     }
   }, [data])
-
-  // const adventureFetch = async (data) => {
-  //   try {
-  //     const response = await fetch('https://travelus-9ca2f8ce253e.herokuapp.com/api/v1/adventure', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': `Bearer ${token}`
-  //       },
-  //       body: JSON.stringify(data),
-  //     })
-  //     if (!response.ok){
-  //       throw new Error('Comment failed') 
-  //     }
-  //     const responseData = await response.json()
-  //     setIsLoading(false)
-  //     setAdventures({status: true, data: responseData.thingsToDo})
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // } 
+  
   const states = [
     "Alabama",
     "Alaska",

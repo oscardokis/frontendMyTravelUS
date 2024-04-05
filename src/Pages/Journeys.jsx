@@ -55,7 +55,7 @@ export default function Journeys() {
         body: JSON.stringify(data),
       })
       if (!response.ok){
-        if(response.status === 401) setAuthUser({username: null, login: false, token: null, id: null})
+        if(response.status === 401) setAuthUser({username: '', login: false, token: null, id: null})
         throw new Error('Comment failed') 
       }
     } catch (error) {
