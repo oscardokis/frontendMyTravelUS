@@ -43,7 +43,7 @@ export default function Comments() {
       }
     }
     fetchComments()
-  }, [])
+  }, [comments])
   const commentFetch = async (data) => {
     try {
       const response = await fetch('https://travelus-9ca2f8ce253e.herokuapp.com/api/v1/comments', {
