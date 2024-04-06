@@ -25,7 +25,27 @@ export default function Comments() {
   const [comments, setComments] = useState([])
   const [dropdownValue, setDropdownValue] = useState()
   const { authUser, setAuthUser, isLogin, setIsLogin} = useContext(GeneralContext)
+  const [clickCount, setClickCount] = useState(0)
   const form = useRef()
+  const commentFetch = async (data) => {
+    try {
+      const response = await fetch('https://travelus-9ca2f8ce253e.herokuapp.com/api/v1/comments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authUser.token}`
+        },
+        body: JSON.stringify(data),
+      })
+      if (!response.ok){
+        if(response.status === 401) setAuthUser({username: '', login: false, token: null, id: null})
+        throw new Error('Comment failed') 
+      }
+      setClickCount(clickCount + 1)
+    } catch (error) {
+      console.error(error)
+    }
+  } 
   useEffect(() => {
     const fetchComments = async () => {
       try {
@@ -43,25 +63,8 @@ export default function Comments() {
       }
     }
     fetchComments()
-  }, [comments])
-  const commentFetch = async (data) => {
-    try {
-      const response = await fetch('https://travelus-9ca2f8ce253e.herokuapp.com/api/v1/comments', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${authUser.token}`
-        },
-        body: JSON.stringify(data),
-      })
-      if (!response.ok){
-        if(response.status === 401) setAuthUser({username: '', login: false, token: null, id: null})
-        throw new Error('Comment failed') 
-      }
-    } catch (error) {
-      console.error(error)
-    }
-  } 
+  }, [clickCount])
+
 
   const handleJourney = (e) => {
     e.preventDefault()
